@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class MyListTile extends StatelessWidget {
-  final String? taskTitle;
+class TaskListTile extends StatelessWidget {
+  final String? label;
   final bool? isChecked;
   final String? date;
   final void Function(bool?)? checkBoxCallBack;
-  const MyListTile(
+  const TaskListTile(
       {super.key,
-      this.isChecked = false,
-      this.taskTitle,
+      this.isChecked,
+      this.label,
       this.checkBoxCallBack,
       this.date});
   @override
@@ -16,7 +16,7 @@ class MyListTile extends StatelessWidget {
     return ListTile(
         leading: const Icon(Icons.drag_indicator),
         title: Text(
-          taskTitle!,
+          label!,
           style: TextStyle(
               fontWeight: FontWeight.w300,
               decoration: isChecked! ? TextDecoration.lineThrough : null),

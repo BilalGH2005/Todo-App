@@ -1,27 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/models/tasks.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
+import '../models/task.dart';
 
 class TasksNotifier extends ChangeNotifier {
-  final List<Tasks> _tasks = [];
-  List<Tasks> get tasks => _tasks;
-  int get taskCount => tasks.length;
+  Box tasksBox = Hive.box('tasks_box');
 
-  void addNewTodo(String newTodoLabel) {
-    final task = Tasks(
-        label: newTodoLabel,
-        date: DateTime.now().toString().split(" ").first,
-        isChecked: false);
-    tasks.add(task);
-    notifyListeners();
-  }
-
-  void changeCheck(int index) {
-    tasks[index].switchingCheck();
+  void addTask(String newTodoLabel) {
+    tasksBox.add(
+      Task(
+          label: newTodoLabel,
+          date: DateTime.now().toString().split(" ").first,
+          isChecked: false),
+    );
     notifyListeners();
   }
 
   void deleteTask(int index) {
-    tasks.remove(tasks[index]);
+    tasksBox.deleteAt(index);
     notifyListeners();
   }
 }

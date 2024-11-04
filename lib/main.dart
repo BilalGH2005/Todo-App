@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/providers/tasks_notifier.dart';
 import 'package:todo_app/providers/theme_provider.dart';
 
+import 'models/task.dart';
 import 'screens/tasks_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final documentsDir = await getApplicationDocumentsDirectory();
-  Hive.init(documentsDir.path);
+  await Hive.initFlutter();
+  Hive.registerAdapter(TaskAdapter());
+  await Hive.openBox('tasks_box');
   runApp(const MyTodoApp());
 }
 

@@ -10,8 +10,7 @@ class AddingTaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String? newTodoLabel;
     void addButtonClicked() {
-      Provider.of<TasksNotifier>(context, listen: false)
-          .addNewTodo(newTodoLabel!);
+      Provider.of<TasksNotifier>(context, listen: false).addTask(newTodoLabel!);
       Navigator.pop(context);
     }
 
@@ -39,9 +38,6 @@ class AddingTaskScreen extends StatelessWidget {
               style: TextStyle(fontSize: 30),
             ),
             TextField(
-                // decoration: InputDecoration(
-                //     enabledBorder: UnderlineInputBorder(
-                //         borderSide: BorderSide(color: Colors.black))),
                 style: const TextStyle().copyWith(fontWeight: FontWeight.w400),
                 enableSuggestions: true,
                 cursorColor: Colors.black,

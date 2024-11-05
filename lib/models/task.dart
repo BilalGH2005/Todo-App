@@ -14,4 +14,12 @@ class Task extends HiveObject {
   bool isChecked;
 
   Task({required this.label, required this.date, this.isChecked = false});
+
+  Task copyWith({String? label, bool? isChecked, String? date}) {
+    return Task(
+      label: label ?? this.label,
+      isChecked: isChecked ?? this.isChecked,
+      date: date ?? this.date,
+    );
+  }
 }

@@ -18,7 +18,7 @@ class _TasksListViewState extends State<TasksListView> {
     return Consumer<TasksNotifier>(
       builder: (context, tasksNotifier, child) {
         final tasksBox = tasksNotifier.tasksBox;
-        return ReorderableListView.builder(
+        return ListView.builder(
           itemCount: tasksBox.length,
           itemBuilder: (context, index) {
             final task = tasksBox.values.cast<Task>().toList()[index];
@@ -39,17 +39,6 @@ class _TasksListViewState extends State<TasksListView> {
                 },
               ),
             );
-          },
-          onReorder: (int oldIndex, int newIndex) {
-            //TODO: onReorder function is not working.. fix it
-            if (oldIndex < newIndex) {
-              newIndex -= 1;
-            }
-            final task = tasksBox.getAt(oldIndex);
-            setState(() {
-              tasksBox.deleteAt(oldIndex);
-              tasksBox.putAt(newIndex, task);
-            });
           },
         );
       },
